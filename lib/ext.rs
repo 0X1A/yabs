@@ -51,8 +51,8 @@ pub fn parse_toml_file<T: AsRef<Path> + Clone>(file: T) -> Result<String, YabsEr
 
 pub fn get_assumed_filename() -> Option<String> {
     if let Ok(current_dir) = env::current_dir() {
-        if let Some(file_stem) = current_dir.components().last() {
-            let mut file_name = file_stem.as_ref().to_string_lossy().into_owned();
+        if let Some(file_stem) = current_dir.file_stem() {
+            let mut file_name = file_stem.to_string_lossy().into_owned();
             file_name.push_str(".toml");
             return Some(file_name);
         }
